@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
 
-public class tema1 {
+public class problema1 {
   static private class Pair<T> {
     public T[] elem;
   }

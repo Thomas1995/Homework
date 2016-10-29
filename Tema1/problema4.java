@@ -54,9 +54,16 @@ public class problema4 {
       return true;
     }
 
+    private String inorder(Node<K,V> node) {
+      if(node == null)
+        return "";
+
+      return inorder(node.left) + " " + node.value + " " + inorder(node.right);
+    }
+
     @Override
     public String toString() {
-      return "";
+      return inorder(root);
     }
   }
 

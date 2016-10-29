@@ -1,12 +1,10 @@
-import java.util.LinkedList;
-import java.util.HashSet;
-import java.util.ArrayDeque;
-import java.util.ListIterator;
+import java.io.*;
+import java.util.Scanner;
 
 public class problema4 {
 
   private static class BinarySearchTree<K extends Comparable<K>, V> {
-    private class Node<K extends Comparable<K>, V> {
+    private class Node<K, V> {
       K key;
       V value;
       Node<K,V> left, right;
@@ -58,7 +56,7 @@ public class problema4 {
       if(node == null)
         return "";
 
-      return inorder(node.left) + " " + node.value + " " + inorder(node.right);
+      return inorder(node.left) + node.value + " " + inorder(node.right);
     }
 
     @Override
@@ -67,7 +65,49 @@ public class problema4 {
     }
   }
 
+  private static class CompClass {
+    int a, b;
+
+    public CompClass(int x, int y) {
+      a = x;
+      b = y;
+    }
+  }
+
+  private static class CompClass2 extends CompClass implements Comparable<CompClass2> {
+    public CompClass2(int x, int y) {
+      super(x, y);
+    }
+
+    public int compareTo(CompClass2 c) {
+      return (a + b) - (c.a + c.b);
+    }
+  }
+
   public static void main(String[] args) {
     BinarySearchTree<Integer, Integer> bst = new BinarySearchTree<Integer, Integer>();
+
+    Scanner scanner = null;
+    try {
+      scanner = new Scanner(new File("problema4f"));
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+    while(scanner.hasNextInt()) {
+      int i = scanner.nextInt();
+      bst.add(i, i);
+    }
+
+    System.out.println(bst.toString());
+
+    BinarySearchTree<CompClass2, Integer> bst2 = new BinarySearchTree<CompClass2, Integer>();
+
+    for(int i = 0; i < 10; ++i) {
+      for(int j = 3; j >= 0; --j) {
+        bst2.add(new CompClass2(i, j), i + j);
+      }
+    }
+
+    System.out.println(bst2.toString());
   }
 }

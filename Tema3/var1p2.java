@@ -1,9 +1,18 @@
 /*
-  Dupa ce se citeste vectorul, se va folosi cautarea binara: la fiecare pas verificam daca mijlocul intervalului in care ne uitam
-  este egal cu pozitia la care acesta se afla. Daca da, am gasit solutia. Daca nu, alegem sa pastram jumatate de interval, dupa
-  caz.
+  Initial vom porni cu intervalul intreg. Retinem atat intervalul din parcurgerea inordine, cat si radacina. Radacina se va afla
+  mereu pe ultima pozitie in postordine.
 
-  Din Teorema Master avem: T(n) = T(n/2) + O(1) => complexitatea este O(log n)
+  Pentru intervalul curent, folosind un vector cu toate pozitiile numereleor in vectorul parcugerii inordine, gasim in O(1)
+  pozitia radacinii. Apoi repetam acest proces pentru intervalul din stanga radacinii si pentru cel din dreapta. In postordine,
+  radacina intervalului drept se va afla la pozitia anterioara - 1, iar pentru cel stang la pozitia anterioara - 1 - lungimea
+  intervalului drept.
+
+  Prin urmare, pentru a construi arborele in memorie, complexitatea timpului va fi O(n), intrucat alegem cate un nod pe rand in
+  O(1) in n pasi.
+
+  Pentru calcularea parcugerii preordine (daca arborele este valid) vom face o simpla parcugere in O(n).
+
+  Astfel, complexitatea totala a algoritmului va fi O(n).
 */
 
 import java.io.*;
@@ -13,7 +22,6 @@ public class var1p2 {
   static int[] postord;
   static int[] inord;
   static int[] preord;
-  static int[] pospost;
   static int[] posin;
   static boolean treeIsValid = true;
   static int index = 0;
@@ -75,14 +83,11 @@ public class var1p2 {
     postord = new int[n];
     inord = new int[n];
     preord = new int[n];
-
-    pospost = new int[n];
     posin = new int[n];
 
     for(int i = 0; i < n; ++i) {
       int x = scanner.nextInt();
       postord[i] = x;
-      pospost[x - 1] = i;
     }
 
     for(int i = 0; i < n; ++i) {

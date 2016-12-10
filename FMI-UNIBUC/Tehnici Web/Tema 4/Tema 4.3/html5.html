@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+    box-sizing: border-box;
+}
+img {
+    width: 100%;
+    height: auto;
+    max-width: 100px;
+}
+.row:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+}
+h1 {
+  font-size: 10;
+}
+@media only screen and (min-width: 600px) {
+    .col-s-1 {width: 8.33%;}
+    .col-s-2 {width: 16.66%;}
+    .col-s-3 {width: 25%;}
+    .col-s-4 {width: 33.33%;}
+    .col-s-5 {width: 41.66%;}
+    .col-s-6 {width: 50%;}
+    .col-s-7 {width: 58.33%;}
+    .col-s-8 {width: 66.66%;}
+    .col-s-9 {width: 75%;}
+    .col-s-10 {width: 83.33%;}
+    .col-s-11 {width: 91.66%;}
+    .col-s-12 {width: 100%;}
+    h1 {font-size: 10;}
+}
+@media only screen and (min-width: 768px) {
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+}
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+.header {
+    background-color: #0099cc;
+    color: #000000;
+    padding: 15px;
+}
+.footer {
+    background-color: #0099cc;
+    color: #000000;
+    text-align: center;
+    font-size: 12px;
+    padding: 15px;
+}
+div:nth-child(3) {
+  background-color: teal;
+}
+div:nth-child(5) {
+  background-color: teal;
+}
+</style>
+</head>
+<body>
+
+<div class="row">
+<div class="col-10 col-s-10 header">
+  <h1>Cateva taguri</h1>
+</div>
+<div class="col-2 col-s-2">
+  <img src="html5.jpeg" alt="html5">
+</div>
+</div>
+
+<div class="row">
+  <div class="col-3 col-s-6">
+    <p>
+      Tagul p<br>
+      &lt;&gt;&lt;/&gt;
+    </p>
+  </div>
+  <div class="col-6 col-s-6">
+    <p>
+      Este folosit pentru delimitarea paragrafelor.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3 col-s-6">
+    <p>
+      Tagul img<br>
+      &lt;/&gt;
+    </p>
+  </div>
+  <div class="col-6 col-s-6">
+    <p>
+      Prin intermediul acestui tag putem introduce imagini in pagina html. Atributul <em>alt</em> este obligatoriu si contine text care se afiseaza in locul imaginii daca aceasta nu poate fi incarcata.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3 col-s-6">
+    <p>
+      Tagul br<br>
+      &lt;/&gt;
+    </p>
+  </div>
+  <div class="col-6 col-s-6">
+    <p>
+      Intrerupe o linie (introduce un lin-break)
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3 col-s-6">
+    <p>
+      Tagul ol<br>
+      &lt;&gt;&lt;/&gt;
+    </p>
+  </div>
+  <div class="col-6 col-s-6">
+    <p>
+      Introduce o lista ordonata.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3 col-s-6">
+    <p>
+      Tagul ul<br>
+      &lt;&gt;&lt;/&gt;
+    </p>
+  </div>
+  <div class="col-6 col-s-6">
+    <p>
+      Introduce o lista neordonata.
+    </p>
+  </div>
+</div>
+
+<div class="row col-12 col-s-12 footer">
+<p>Exercitiu in cadrul laboratorului de tehnici web.</p>
+</div>
+
+</body>
+</html>

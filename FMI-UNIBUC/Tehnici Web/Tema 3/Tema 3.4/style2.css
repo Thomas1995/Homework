@@ -1,0 +1,6 @@
+#par {
+  color: green;
+  font-family: "Comic Sans MS";
+}
+
+/* Se observa ca daca sunt incluse mai multe fisiere .css, stilul final va fi setat de ultimul fisier */

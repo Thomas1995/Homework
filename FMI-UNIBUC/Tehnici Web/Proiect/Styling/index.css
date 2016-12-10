@@ -1,0 +1,127 @@
+.header {
+  width: 100%;
+  z-index:1;
+  border-bottom: 3px solid #000000;
+}
+
+.footer {
+  content: "";
+  clear: both;
+  display: block;
+  color: #372e29;
+  font-size: 0.8em;
+  padding: 10px;
+  text-align: right;
+  border-top: 3px solid #000000;
+  position:relative;
+  top: 50px;
+  height: 50px;
+}
+
+.footer, .header {
+  background-color: #f0c75e;
+}
+
+nav {
+  width: 100%;
+  text-align: center;
+}
+
+nav.subnav {
+  width: 33%;
+  float: left;
+}
+
+.header nav {
+  height: 50px;
+}
+
+.header a {
+  color: #372e29;
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: #000000;
+}
+
+.header a.leftnav, a.rightnav {
+  width: 10%;
+  float: left;
+  font-weight: normal;
+  padding: 20px;
+}
+
+.motto {
+  margin-top: 3%;
+  margin-left: 2%;
+  color: #372e29;
+  font-weight: bold;
+}
+
+.motto h1 {
+  font-size: 3em;
+  text-shadow:#000 2px 2px;
+}
+
+.motto p {
+  font-size: 0.7em;
+  margin-top: -25px;
+}
+
+#headerimg {
+  width: 100%;
+}
+
+.guides h2 {
+    color: #372e29;
+    font-size: 28px;
+    position: relative;
+    margin-left: 25px;
+}
+
+.guides p {
+    margin-bottom: 13px;
+    font-size: 15px;
+    position: relative;
+    margin-left: 35px;
+}
+
+.guides img {
+  border: 3px solid #dbdbdb;
+  width: 80%;
+}
+
+.learn-more nav.break {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.learn-more a {
+  color: #00b0ff;
+  font-style: oblique;
+}
+
+.learn-more p {
+  width: 33%;
+  float: left;
+  font-weight: normal;
+}
+
+.learn-more p.headertext {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0px;
+  background-color: #ffffff;
+}
+
+@media only screen and (min-width: 600px) {
+  .header a.rightnav {
+    float: right;
+  }
+}

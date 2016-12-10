@@ -1,0 +1,44 @@
+img.thumbnail {
+	width: 100px;
+}
+
+#img1:hover {
+	transition: transform 2s, filter 2s;
+	transform: scale(0.5,2);
+	filter: grayscale(100%);
+}
+
+@keyframes linear {
+    0%   {left:0px; top:0px;}
+    50% {left:1000px; top:0px;}
+	100% {left:0; top:0px;}
+}
+
+#img2 {
+	position: relative;
+	animation-name: linear;
+    animation-duration: 10s;
+}
+
+@keyframes circular {
+    from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+}
+
+#img3 {
+	position: relative;
+	animation-name: circular;
+    animation-duration: 10s;
+}
+
+#fan1 {
+	transform: rotate(45deg) translateX(20px);
+}
+
+#fan3 {
+	transform: rotate(-45deg) translateX(-20px);
+}
+
+img.fan:hover {
+	opacity: 0.5;
+}

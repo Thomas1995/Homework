@@ -1,0 +1,35 @@
+table {
+  border-spacing:0;
+  border-collapse: collapse;
+  border-style: solid;
+  border-width: 3px;
+}
+
+th {
+  height: 80;
+  width: 60;
+  border-style: solid;
+  border-width: 1px;
+  border-bottom: 3px solid;
+  -webkit-box-shadow: 0 6px 6px -6px #222;
+  -moz-box-shadow: 0 6px 6px -6px #222;
+  box-shadow: 0 6px 6px -6px #222;
+  background-color: #35cc17;
+}
+
+td {
+  height: 30;
+  width: 60;
+  border-style: solid;
+  border-width: 1px;
+  background-color: #3cdf1c;
+}
+
+#first {
+  border-right: 3px solid;
+  width: 100;
+}
+
+#last {
+  width: 200;
+}

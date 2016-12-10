@@ -1,0 +1,21 @@
+<!DOCTYPE html> <html lang="ro"> 
+<head> 
+	<script>
+		var cont = true;
+		while(cont) {
+			var dictionar = {"acesta":"this", "este":"is", "un":"a"};
+			var cuv = prompt("Introduceti un cuvant");
+			for (var c in dictionar) {
+				if(cuv == c) {
+					alert(dictionar[c]);
+				}
+			}
+			if (!confirm("Vrei sa continui?")) { 
+			  cont = false;
+			}
+		}
+	</script>
+</head> 
+<body>
+</body>
+</html>

@@ -1,3 +1,7 @@
+/*
+	Aflati intersectia intre 2 segmente.
+*/
+
 #include <iostream>
 #include <algorithm>
 using namespace std;

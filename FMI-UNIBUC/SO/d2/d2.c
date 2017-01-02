@@ -11,7 +11,7 @@ off_t fsize(const char path[]) {
   if (stat(path, &st) == 0)
     return st.st_size;
 
-  fprintf(stderr, "Cannot determine size of %s: %s\n",
+  printf("Cannot determine size of %s: %s\n",
     path, strerror(errno));
 
   return -1;

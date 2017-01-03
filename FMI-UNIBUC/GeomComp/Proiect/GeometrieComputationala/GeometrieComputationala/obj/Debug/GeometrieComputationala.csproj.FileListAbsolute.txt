@@ -1,0 +1,9 @@
+D:\GitHub\Homework\FMI-UNIBUC\GeomComp\Proiect\GeometrieComputationala\GeometrieComputationala\bin\Debug\GeometrieComputationala.exe.config
+D:\GitHub\Homework\FMI-UNIBUC\GeomComp\Proiect\GeometrieComputationala\GeometrieComputationala\bin\Debug\GeometrieComputationala.exe
+D:\GitHub\Homework\FMI-UNIBUC\GeomComp\Proiect\GeometrieComputationala\GeometrieComputationala\bin\Debug\GeometrieComputationala.pdb
+D:\GitHub\Homework\FMI-UNIBUC\GeomComp\Proiect\GeometrieComputationala\GeometrieComputationala\obj\Debug\GeometrieComputationala.csprojResolveAssemblyReference.cache
+D:\GitHub\Homework\FMI-UNIBUC\GeomComp\Proiect\GeometrieComputationala\GeometrieComputationala\obj\Debug\GeometrieComputationala.MainForm.resources
+D:\GitHub\Homework\FMI-UNIBUC\GeomComp\Proiect\GeometrieComputationala\GeometrieComputationala\obj\Debug\GeometrieComputationala.Properties.Resources.resources
+D:\GitHub\Homework\FMI-UNIBUC\GeomComp\Proiect\GeometrieComputationala\GeometrieComputationala\obj\Debug\GeometrieComputationala.csproj.GenerateResource.Cache
+D:\GitHub\Homework\FMI-UNIBUC\GeomComp\Proiect\GeometrieComputationala\GeometrieComputationala\obj\Debug\GeometrieComputationala.exe
+D:\GitHub\Homework\FMI-UNIBUC\GeomComp\Proiect\GeometrieComputationala\GeometrieComputationala\obj\Debug\GeometrieComputationala.pdb

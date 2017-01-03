@@ -49,8 +49,11 @@ namespace GeometrieComputationala
 
         private void undoBtn_Click(object sender, EventArgs e)
         {
-            points.RemoveAt(points.Count - 1);
-            panel.Invalidate();
+            if (points.Count > 0)
+            {
+                points.RemoveAt(points.Count - 1);
+                panel.Invalidate();
+            }
         }
 
         private void resetBtn_Click(object sender, EventArgs e)

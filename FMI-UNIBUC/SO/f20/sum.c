@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-  int fdDest = open(argv[3], O_WRONLY | O_CREAT, 0666);
+  int fdDest = open(argv[3], O_RDWR | O_CREAT, 0666);
   if(fdDest == -1) {
     printf("Cannot open f: %s\n", strerror(errno));
     exit(1);

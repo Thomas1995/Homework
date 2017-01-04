@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-  int fdDest = open(argv[3], O_WRONLY | O_CREAT, 0666);
+  int fdDest = open(argv[3], O_RDWR | O_CREAT, 0666);
   if(fdDest == -1) {
     printf("Cannot open f: %s\n", strerror(errno));
     exit(1);
@@ -37,9 +37,6 @@ int main(int argc, char** argv) {
   int m = m1, n = n2;
 
   new(fdDest, m, n);
-
-  signature(fdDest, &m, &n);
-  printf("%d %d\n", m, n);
 
   int i, j, k, a, b;
   for(i = 0; i < m1; ++i)
@@ -51,13 +48,7 @@ int main(int argc, char** argv) {
         sum += a * b;
       }
 
-      signature(fdDest, &m, &n);
-      printf("before: %d %d\n", m, n);
-
       set(fdDest, i, j, sum);
-
-      signature(fdDest, &m, &n);
-      printf("after: %d %d\n", m, n);
     }
 
   close(fdSrc1);

@@ -24,6 +24,11 @@ int main(int argc, char** argv) {
 
   FILE* f = fopen(argv[1], "r");
 
+  if(f == NULL) {
+    printf("Could not open %s: %s\n", argv[1], strerror(errno));
+    exit(1);
+  }
+
   fscanf(f, "%d %d", &m, &n);
   write(fdBinaryFile, &m, sizeof(m));
   write(fdBinaryFile, &n, sizeof(n));

@@ -3,19 +3,19 @@
 
 int main(int argc, char** argv) {
   if(argc != 4) {
-    perror("try: sum f1 f2 f");
+    printf("try: sum f1 f2 f\n");
     exit(1);
   }
 
   int fdSrc1 = open(argv[1], O_RDONLY);
   if(fdSrc1 == -1) {
-    perror("Cannot open f1");
+    printf("Cannot open f1: %s\n", strerror(errno));
     exit(1);
   }
 
   int fdSrc2 = open(argv[2], O_RDONLY);
   if(fdSrc2 == -1) {
-    perror("Cannot open f2");
+    printf("Cannot open f2: %s\n", strerror(errno));
     exit(1);
   }
 
@@ -23,16 +23,14 @@ int main(int argc, char** argv) {
   signature(fdSrc1, &m1, &n1);
   signature(fdSrc2, &m2, &n2);
 
-  printf("%d %d\n%d %d\n", m1, n1, m2, n2);
-
   if(m1 != m2 || n1 != n2) {
-    perror("Cannot make the sum of the input matrixes");
+    printf("Cannot make the sum of the input matrices\n");
     exit(1);
   }
 
-  int fdDest = creat(argv[3], O_WRONLY);
+  int fdDest = open(argv[3], O_WRONLY | O_CREAT, 0666);
   if(fdDest == -1) {
-    perror("Cannot open f");
+    printf("Cannot open f: %s\n", strerror(errno));
     exit(1);
   }
 

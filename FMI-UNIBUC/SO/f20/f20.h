@@ -3,25 +3,25 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-#define STDIN 0
-#define STDOUT 1
-#define STDERR 2
+#include <errno.h>
+#include <string.h>
+#include <assert.h>
 
 void new(int fd, int m, int n) {
-  write(fd, &m, sizeof(int));
-  write(fd, &n, sizeof(int));
+  assert(lseek(fd, 0, SEEK_SET) != -1);
+  assert(write(fd, &m, sizeof(int)) != -1);
+  assert(write(fd, &n, sizeof(int)) != -1);
 
   int i, j, zero = 0;
   for(i = 0; i < m; ++i)
     for(j = 0; j < n; ++j)
-      write(fd, &zero, sizeof(int));
+      assert(write(fd, &zero, sizeof(float)) != -1);
 }
 
 void signature(int fd, int* m, int* n) {
-  lseek(fd, 0, SEEK_SET);
-  read(fd, m, sizeof(int));
-  read(fd, n, sizeof(int));
+  assert(lseek(fd, 0, SEEK_SET) != -1);
+  assert(read(fd, m, sizeof(int)) != -1);
+  assert(read(fd, n, sizeof(int)) != -1);
 }
 
 float get(int fd, int i, int j) {
@@ -30,14 +30,18 @@ float get(int fd, int i, int j) {
   signature(fd, &m, &n);
 
   off_t p = sizeof(int) * 2 + sizeof(float) * (i * n + j);
-  lseek(fd, p, SEEK_SET);
-  read(fd, &x, sizeof(float));
-
-  printf("%f\n", x);
+  assert(lseek(fd, p, SEEK_SET) != -1);
+  assert(read(fd, &x, sizeof(float)) != -1);
 
   return x;
 }
 
 void set(int fd, int i, int j, float x) {
+  int m, n;
+  signature(fd, &m, &n);
 
+  off_t p = sizeof(int) * 2 + sizeof(float) * (i * n + j);
+  assert(lseek(fd, p, SEEK_SET) != -1);
+
+  assert(write(fd, &x, sizeof(float)) != -1);
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script>
+        function submitcomm() {
+            var ans = document.getElementById("intrebare");
+
+            var scoreinput = document.getElementById("scor");
+
+            scoreinput.value = "0/10";
+
+            if (ans.value == "6 cai")
+                scoreinput.value = "10/10";
+
+            if (ans.value == "2 cai frumosi")
+                scoreinput.value = "9/10";
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        Cati cai se pot inhama la o caruta?
+    </div>
+    <div>
+        <input id="intrebare" name="intrebare">
+    </div>
+    <div>
+        <button onclick="submitcomm()">Calculeaza scorul tau</button>
+    </div>
+    <div>
+        <input id="scor" name="scor">
+    </div>
+</body>
+
+</html>

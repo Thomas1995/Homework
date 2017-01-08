@@ -1,0 +1,53 @@
+<!DOCTYPE html> <html lang="ro"> 
+<head> 
+	<script src="script.js"></script>
+    <style>
+        div {
+            position: absolute;
+        }
+
+        #main {
+            width: 500px;
+            height: 600px;
+            background-color: black;
+            top: 0px;
+            left: 0px;
+        }
+
+        #score {
+            left: 0px;
+            top: 600px;
+            width: 500px;
+            background-color: gray;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .mini {
+            width: 8px;
+            height: 8px;
+            background-color: hotpink;
+        }
+
+        .smoke {
+            width: 8px;
+            height: 8px;
+            background-color: darkgray;
+        }
+
+        .cigarette {
+            width: 40px;
+            height: 6px;
+            background-color: white;
+            border-right: 3px solid brown;
+            top: 590px;
+        }
+    </style>
+</head> 
+<body onload="loadall()" onkeydown="keydown(event)">
+    <div id="main"></div>
+    <div id="score">
+        Score: <input type="text" id="inpscore">
+    </div>
+</body>
+</html>

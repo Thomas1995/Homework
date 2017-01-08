@@ -1,4 +1,10 @@
 /*
+  Definim D[i][j] ca fiind unul dintre numerele din grupul i care prin insumarea cu alte numere din grupurile 1...i-1
+  dau prin insumare j sau -1 in cazul in care acest numar nu exista.
+
+  Astfel, solutia se va gasi in D[n - 1][k].
+
+  Complexitatea totala este O(mk).
 */
 
 import java.io.*;

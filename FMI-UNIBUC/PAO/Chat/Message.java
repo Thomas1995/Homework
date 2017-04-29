@@ -10,12 +10,11 @@ public class Message implements Serializable {
     MSG_SHOW_USERS,
     MSG_ANNOUNCE,
     MSG_CHAT,
-    MSG_DISCONNECT
+    MSG_DISCONNECT,
+    MSG_SERVER
   };
   public MessageType msgType;
   public String buffer;
-
-  Message() {}
 
   public static Message parse(String text) {
     Message msg = new Message();

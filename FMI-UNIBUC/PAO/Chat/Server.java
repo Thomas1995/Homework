@@ -10,11 +10,13 @@ class Connection extends Thread {
   private Socket socket;
   private ObjectInputStream input;
   private ObjectOutputStream output;
+  private Connection partner;
 
   public Connection(Socket socket) {
     try {
-      this.socket = socket;
       connected = false;
+      this.socket = socket;
+      partner = null;
       input = new ObjectInputStream(socket.getInputStream());
       output = new ObjectOutputStream(socket.getOutputStream());
     } catch(Exception e) {
@@ -77,6 +79,7 @@ class Connection extends Thread {
       while(true) {
         Message msg = (Message) input.readObject();
         Message ans = new Message();
+        ans.msgType = Message.MessageType.MSG_SERVER;
 
         switch (msg.msgType) {
           case MSG_SHOW_USERS:
@@ -88,10 +91,37 @@ class Connection extends Thread {
             ans.buffer = userList;
             output.writeObject(ans);
             break;
+
+          case MSG_CHAT:
+            partner = null;
+            for (Connection con: Server.connections) {
+              if(con.connected && con.username.equals(msg.buffer)) {
+                partner = con;
+                break;
+              }
+            }
+
+            if(partner == null)
+              ans.buffer = "There is no connected user with that name.\n";
+            else
+              ans.buffer = "You began a chat with " + partner.username + ". Say hi!\n";
+
+            output.writeObject(ans);
+            break;
+
           case MSG_DISCONNECT:
             socket.close();
             disconnect();
             break;
+
+          case MSG_TEXT:
+            // TO DO: check if partner disconnected
+            if(partner != null) {
+              System.out.println(username + " to " + partner.username + ": " + msg.buffer);
+              ans.msgType = Message.MessageType.MSG_TEXT;
+              ans.buffer = username + ": " + msg.buffer;
+              partner.output.writeObject(ans);
+            }
         }
       }
     } catch(Exception e) {

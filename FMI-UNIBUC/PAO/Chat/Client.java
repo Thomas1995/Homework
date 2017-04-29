@@ -3,6 +3,59 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
+class MessagePool extends Thread {
+  private ObjectInputStream input;
+  private Message pendingMsg;
+
+  public MessagePool(ObjectInputStream input) {
+    this.input = input;
+  }
+
+  public Message get() {
+    Message msg = new Message();
+
+    try {
+      while(pendingMsg == null) {
+        synchronized(input) {
+          input.wait();
+        }
+      }
+      msg.msgType = pendingMsg.msgType;
+      msg.buffer = pendingMsg.buffer;
+
+      synchronized(pendingMsg) {
+        pendingMsg.notify();
+      }
+    } catch(Exception e) {}
+
+    return msg;
+  }
+
+  public void run() {
+    try {
+      Message msg;
+
+      while(true) {
+        msg = (Message) input.readObject();
+
+        if(msg.msgType == Message.MessageType.MSG_TEXT) {
+          System.out.println(msg.buffer);
+        }
+        else {
+          pendingMsg = msg;
+          synchronized(input) {
+            input.notify();
+          }
+          synchronized(pendingMsg) {
+            pendingMsg.wait();
+          }
+          pendingMsg = null;
+        }
+      }
+    } catch(Exception e) {}
+  }
+}
+
 public class Client {
   public static String username;
 
@@ -50,6 +103,9 @@ public class Client {
 
       System.out.println("Write /h or /help for help.\n");
 
+      MessagePool pool = new MessagePool(input);
+      pool.start();
+
       String text;
       while(true) {
         text = scanner.nextLine();
@@ -66,6 +122,7 @@ public class Client {
 
           if(msg.msgType == Message.MessageType.MSG_DISCONNECT) {
             System.out.println("Bye-bye!");
+            System.exit(0);
           }
 
           if(msg.msgType == Message.MessageType.MSG_INVALID_COMMAND) {
@@ -76,7 +133,7 @@ public class Client {
           output.writeObject(msg);
 
           if(msg.msgType != Message.MessageType.MSG_TEXT) {
-            msg = (Message) input.readObject();
+            msg = pool.get();
             System.out.println(msg.buffer);
           }
         } while(false);

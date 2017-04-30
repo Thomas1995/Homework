@@ -115,13 +115,24 @@ class Connection extends Thread {
             break;
 
           case MSG_TEXT:
-            // TO DO: check if partner disconnected
             if(partner != null) {
               System.out.println(username + " to " + partner.username + ": " + msg.buffer);
               ans.msgType = Message.MessageType.MSG_TEXT;
               ans.buffer = username + ": " + msg.buffer;
               partner.output.writeObject(ans);
             }
+            break;
+
+          case MSG_ANNOUNCE:
+            System.out.println(username + " announced: " + msg.buffer);
+            for (Connection con: Server.connections)
+              if(con.connected && this != con) {
+                ans = new Message();
+                ans.msgType = Message.MessageType.MSG_TEXT;
+                ans.buffer = username + ": " + msg.buffer;
+                con.output.writeObject(ans);
+              }
+            break;
         }
       }
     } catch(Exception e) {
@@ -134,6 +145,16 @@ class Connection extends Thread {
       connected = false;
       Server.connections.remove(this);
       System.out.println(username + " disconnected");
+      for (Connection con: Server.connections)
+        if(con.connected && con.partner.equals(this)) {
+          con.partner = null;
+          Message msg = new Message();
+          msg.msgType = Message.MessageType.MSG_TEXT;
+          msg.buffer = "Your partner disconnected.";
+          try {
+            con.output.writeObject(msg);
+          } catch(Exception e) {}
+        }
     }
   }
 }

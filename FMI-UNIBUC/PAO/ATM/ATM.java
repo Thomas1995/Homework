@@ -9,6 +9,7 @@ public class ATM extends UnicastRemoteObject implements IATM {
   static HashMap<Integer, Integer> sums;
   static HashMap<Integer, Integer> pins;
   static int lastId;
+  static Object mut;
 
   public ATM() throws RemoteException {
     super();
@@ -17,30 +18,30 @@ public class ATM extends UnicastRemoteObject implements IATM {
     lastId = 0;
   }
 
-  public int createAccount(int password) {
+  public synchronized int createAccount(int password) {
     ++lastId;
     sums.put(lastId, 0);
     pins.put(lastId, password);
     return lastId;
   }
 
-  public boolean isAccountValid(int accountId) {
+  public synchronized boolean isAccountValid(int accountId) {
     if(sums.get(accountId) == null)
       return false;
     return true;
   }
 
-  public boolean login(int accountId, int password) {
+  public synchronized boolean login(int accountId, int password) {
     if(pins.get(accountId) == password)
       return true;
     return false;
   }
 
-  public void deposit(int accountId, int amount) {
+  public synchronized void deposit(int accountId, int amount) {
     sums.put(accountId, inquiry(accountId) + amount);
   }
 
-  public int widthdraw(int accountId, int amount) {
+  public synchronized int widthdraw(int accountId, int amount) {
     int balance = inquiry(accountId);
     if(balance < amount)
       amount = 0;
@@ -48,7 +49,7 @@ public class ATM extends UnicastRemoteObject implements IATM {
     return amount;
   }
 
-  public int inquiry(int accountId) {
+  public synchronized int inquiry(int accountId) {
     Integer i = sums.get(accountId);
     return i == null ? 0 : i;
   }

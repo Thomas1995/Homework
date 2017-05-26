@@ -1,5 +1,63 @@
 import java.util.Scanner;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
+
+class CommandInterpreter {
+  private IATM atm;
+  private int accountId;
+
+  public CommandInterpreter(IATM atm, int accountId) {
+    this.atm = atm;
+    this.accountId = accountId;
+  }
+
+  public int interpret(String line) throws RemoteException {
+    if(line.equals("quit")) {
+      System.out.println("Have a great day!");
+      return -1;
+    }
+
+    if(line.equals("inquiry")) {
+      System.out.println("Balance: " + atm.inquiry(accountId));
+    }
+
+    if (line.length() >= 9 && line.substring(0, 7).equals("deposit")) {
+      int amount = Integer.parseInt(line.substring(8));
+
+      if(amount <= 0) {
+        System.out.println("The amount can not be 0 or negative.");
+        return 0;
+      }
+
+      atm.deposit(accountId, amount);
+      System.out.println("Transaction succeeded!");
+    }
+
+    if (line.length() >= 11 && line.substring(0, 9).equals("widthdraw")) {
+      int amount = Integer.parseInt(line.substring(10));
+
+      if(amount <= 0) {
+        System.out.println("The amount can not be 0 or negative.");
+        return 0;
+      }
+
+      if(amount % 10 != 0) {
+        System.out.println("The amount must be a multiple of 10.");
+        return 0;
+      }
+
+      int res = atm.widthdraw(accountId, amount);
+
+      if(res == 0) {
+        System.out.println("You do not have enough money in your account!");
+      }
+      else {
+        System.out.println("Transaction succeeded!");
+      }
+    }
+    return 0;
+  }
+}
 
 public class Client {
   public static void main(String[] args) {
@@ -60,53 +118,14 @@ public class Client {
       System.out.println("inquiry");
       System.out.println("quit");
 
+      CommandInterpreter interpreter = new CommandInterpreter(atm, accountId);
+
       while(true) {
         System.out.println();
         String line = scanner.nextLine();
-
-        if(line.equals("quit")) {
-          System.out.println("Have a great day!");
+        int ret = interpreter.interpret(line);
+        if (ret == -1)
           break;
-        }
-
-        if(line.equals("inquiry")) {
-          System.out.println("Balance: " + atm.inquiry(accountId));
-        }
-
-        if (line.length() >= 9 && line.substring(0, 7).equals("deposit")) {
-          int amount = Integer.parseInt(line.substring(8));
-
-          if(amount <= 0) {
-            System.out.println("The amount can not be 0 or negative.");
-            continue;
-          }
-
-          atm.deposit(accountId, amount);
-          System.out.println("Transaction succeeded!");
-        }
-
-        if (line.length() >= 11 && line.substring(0, 9).equals("widthdraw")) {
-          int amount = Integer.parseInt(line.substring(10));
-
-          if(amount <= 0) {
-            System.out.println("The amount can not be 0 or negative.");
-            continue;
-          }
-
-          if(amount % 10 != 0) {
-            System.out.println("The amount must be a multiple of 10.");
-            continue;
-          }
-
-          int res = atm.widthdraw(accountId, amount);
-
-          if(res == 0) {
-            System.out.println("You do not have enough money in your account!");
-          }
-          else {
-            System.out.println("Transaction succeeded!");
-          }
-        }
       }
     } catch(Exception e) {
       System.out.println(e.getMessage());

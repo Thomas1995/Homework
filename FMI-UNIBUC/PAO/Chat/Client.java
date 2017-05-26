@@ -109,7 +109,7 @@ public class Client {
       String text;
       while(true) {
         text = scanner.nextLine();
-        msg = Message.parse(text);
+        msg = Message.messageFactory(text);
 
         do {
           if(msg.msgType == Message.MessageType.MSG_HELP) {

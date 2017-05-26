@@ -16,7 +16,7 @@ public class Message implements Serializable {
   public MessageType msgType;
   public String buffer;
 
-  public static Message parse(String text) {
+  public static Message messageFactory(String text) {
     Message msg = new Message();
     if(text.charAt(0) == '/') {
       do {

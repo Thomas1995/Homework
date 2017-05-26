@@ -2,8 +2,20 @@ import java.util.HashMap;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 import java.rmi.Naming;
-import java.lang.Process;
-import java.lang.Runtime;
+import java.rmi.registry.LocateRegistry;
+import java.net.MalformedURLException;
+
+class RegistryInitializerAdapter {
+  static void initRegistry() throws RemoteException {
+    LocateRegistry.createRegistry(1099);
+  }
+
+  static void createATMObject() throws RemoteException, MalformedURLException {
+    ATM atm = new ATM();
+    Naming.rebind("ATM", atm);
+    System.out.println("The ATM is open!");
+  }
+}
 
 public class ATM extends UnicastRemoteObject implements IATM {
   static HashMap<Integer, Integer> sums;
@@ -56,14 +68,9 @@ public class ATM extends UnicastRemoteObject implements IATM {
 
   public static void main(String[] args) {
     try {
-      Runtime run = Runtime.getRuntime();
-      Process proc = run.exec(new String[]{"/bin/sh", "rmiregistry &"});
-      proc.waitFor();
-
-      ATM atm = new ATM();
-      Naming.rebind("ATM", atm);
-      System.out.println("The ATM is open!");
-
+      RegistryInitializerAdapter ria = new RegistryInitializerAdapter();
+      ria.initRegistry();
+      ria.createATMObject();
     } catch(Exception e) {
       System.out.println(e.getMessage());
     }
